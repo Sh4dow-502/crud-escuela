@@ -1,5 +1,5 @@
 // URL API Backend
-const API = "http://localhost:3000/alumnos";
+const API = "http://localhost:8080/alumnos";
 
 // Declaramos variables para no depender de variables globales creadas por el navegador
 const btnActualizar = document.getElementById("btnActualizar");
@@ -7,6 +7,7 @@ const btnCancelar = document.getElementById("btnCancelar");
 const btnGuardar = document.getElementById("btnGuardar");
 const formAlumno = document.getElementById("formAlumno");
 const tablaBody = document.getElementById("tablaBody");
+const alertPlaceHolder = document.getElementById("alertPlaceHolder");
 
 // cargar alumnos
 async function cargarAlumnos() {
@@ -67,9 +68,12 @@ formAlumno.addEventListener("submit", async (e) => {
 
   if (!res.ok) {
     const error = await res.json();
-    alert(error.error);
+    mostrarAlerta(error.message, "danger");
+    // alert(error.message);
     return;
   }
+
+  mostrarAlerta("Guardado correctamente", "success");
 
   cargarAlumnos();
   e.target.reset();
@@ -105,7 +109,8 @@ btnActualizar.addEventListener("click", async () => {
   });
   if (!res.ok) {
     const error = await res.json();
-    alert(error.error);
+    mostrarAlerta(error.message, "danger");
+    // alert(error.message);
     return;
   }
 
@@ -124,7 +129,13 @@ btnCancelar.addEventListener("click", () => {
 // eliminar alumno
 async function eliminarAlumno(id) {
   // await fetch("http://localhost:3000/alumnos/1")
-  await fetch(`${API}/${id}`, { method: "DELETE" });
+  const res = await fetch(`${API}/${id}`, { method: "DELETE" });
+
+  if (!res.ok) {
+    const error = await res.json();
+    mostrarAlerta(error.message, "danger");
+  }
+  mostrarAlerta("Eliminado correctamente", "success");
   cargarAlumnos();
 }
 
@@ -150,4 +161,24 @@ function desactivarEdicion() {
   btnGuardar.classList.remove("d-none");
   btnActualizar.classList.add("d-none");
   btnCancelar.classList.add("d-none");
+}
+
+function mostrarAlerta(message, type) {
+  alertPlaceHolder.innerHTML = `
+    <div class="alert alert-${type} alert-dismissible fade" role="alert">
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+`;
+  const alert = document.querySelector(".alert");
+
+  setTimeout(() => {
+    alert.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
+    alert.classList.remove("show");
+
+    setTimeout(() => alert.remove(), 200);
+  }, 2400);
 }
