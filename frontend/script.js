@@ -1,5 +1,13 @@
+// Puerto JS
+// PORT = 3000
+// Puerto Java
+// PORT = 8081
+// Puerto C#
+// PORT = 5258
+
 // URL API Backend
-const API = "http://localhost:8080/alumnos";
+PORT = 5258;
+const API = `http://localhost:${PORT}/alumnos`;
 
 // Declaramos variables para no depender de variables globales creadas por el navegador
 const btnActualizar = document.getElementById("btnActualizar");
