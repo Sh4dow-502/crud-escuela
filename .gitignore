@@ -1,14 +1,54 @@
-node_modules/
+# node_modules/
 
 
 
-### Java ###
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# ### Java ###
+# HELP.md
+# target/
+# .mvn/wrapper/maven-wrapper.jar
+# !**/src/main/**/target/
+# !**/src/test/**/target/
 
 
-### VS Code ###
+# ### VS Code ###
+# .vscode/
+
+# ==========================================
+# JAVA (Spring Boot)
+# ==========================================
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings/
+
+# ==========================================
+# JAVASCRIPT (Express)
+# ==========================================
+**/node_modules/
+**/.env
+**/.npm
+**/package-lock.json (opcional, algunos prefieren subirlo)
+
+# ==========================================
+# C# (ASP.NET Core)
+# ==========================================
+**/bin/
+**/obj/
+**/[Dd]ebug/
+**/[Rr]elease/
+**/.vs/
+**/*.user
+**/*.suo
+**/*.db
+**/*.localdb
+
+# ==========================================
+# CONFIGURACIÓN GENERAL (IDEs y SO)
+# ==========================================
+.idea/
 .vscode/
+.DS_Store
+Thumbs.db
